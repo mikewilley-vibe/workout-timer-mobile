@@ -1,6 +1,6 @@
 # Workout timer
 
-A simple first version of a HIIT workout timer app, built with Expo.
+A native HIIT workout timer built with Expo and React Native. It includes 60/30 and 40/20 presets, a customizable interval timer, work/rest color states, pause/resume/reset controls, transition haptics, and screen-awake behavior during workouts.
 
 ## Start the app
 

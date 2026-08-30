@@ -9,11 +9,8 @@ export default function RootLayout() {
         <Stack.Screen
           name="workout"
           options={{
-            title: 'Workout Screen',
-            headerBackTitle: 'Back',
-            headerShadowVisible: false,
-            headerStyle: { backgroundColor: '#F3F3F1' },
-            headerTintColor: '#1A1A1A',
+            headerShown: false,
+            gestureEnabled: false,
           }}
         />
       </Stack>
