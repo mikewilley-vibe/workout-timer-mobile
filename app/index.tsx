@@ -31,7 +31,7 @@ export default function HomeScreen() {
   }
 
   return <SafeAreaView style={styles.safeArea}><ScrollView contentContainerStyle={styles.content}>
-    <View style={styles.hero}><Text style={styles.kicker}>READY. SET. SWEAT.</Text><Text style={styles.title}>HIIT Timer</Text><Text style={styles.subtitle}>Simple intervals. Big effort. No account required.</Text></View>
+    <View style={styles.hero}><Text style={styles.kicker}>READY. SHIFT. SWEAT.</Text><Text style={styles.title}>SweatShift</Text><Text style={styles.subtitle}>Simple intervals. Big effort. No account required.</Text></View>
     <Text style={styles.sectionTitle}>QUICK START</Text>
     <TimerCard title="30 Minute Workout" timing="60 sec work  •  30 sec rest" duration="30 min" accent="#20B86A" onPress={() => openTimer('30 Minute Workout', 60, 30, 30)} />
     <TimerCard title="EMOM" timing="40 sec work  •  20 sec rest" duration="10 min" accent="#FF9F1C" onPress={() => openTimer('EMOM', 40, 20, 10)} />

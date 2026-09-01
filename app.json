@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "HIIT Timer",
+    "name": "SweatShift",
     "slug": "workout-timer-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "workouttimermobile",
+    "icon": "./assets/images/sweatshift-icon.png",
+    "scheme": "sweatshift",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -35,12 +35,12 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/sweatshift-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#071329",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#071329"
           }
         }
       ]
