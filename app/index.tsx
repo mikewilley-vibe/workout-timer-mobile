@@ -33,8 +33,9 @@ export default function HomeScreen() {
   return <SafeAreaView style={styles.safeArea}><ScrollView contentContainerStyle={styles.content}>
     <View style={styles.hero}><Text style={styles.kicker}>READY. SET. SWEAT.</Text><Text style={styles.title}>HIIT Timer</Text><Text style={styles.subtitle}>Simple intervals. Big effort. No account required.</Text></View>
     <Text style={styles.sectionTitle}>QUICK START</Text>
-    <TimerCard title="Go Hard 30" timing="60 sec work  •  30 sec rest" duration="30 min" accent="#20B86A" onPress={() => openTimer('Go Hard 30', 60, 30, 30)} />
-    <TimerCard title="Fast 40/20" timing="40 sec work  •  20 sec rest" duration="10 min" accent="#FF9F1C" onPress={() => openTimer('Fast 40/20', 40, 20, 10)} />
+    <TimerCard title="30 Minute Workout" timing="60 sec work  •  30 sec rest" duration="30 min" accent="#20B86A" onPress={() => openTimer('30 Minute Workout', 60, 30, 30)} />
+    <TimerCard title="EMOM" timing="40 sec work  •  20 sec rest" duration="10 min" accent="#FF9F1C" onPress={() => openTimer('EMOM', 40, 20, 10)} />
+    <TimerCard title="HIIT" timing="20 sec work  •  10 sec rest" duration="8 min" accent="#4285F4" onPress={() => openTimer('HIIT', 20, 10, 8)} />
     <View style={styles.customCard}><Text style={styles.customTitle}>Build your own</Text><Text style={styles.customSubtitle}>Use the controls to set each interval.</Text><View style={styles.controlsList}>
       <NumberControl label="WORK" value={work} unit="sec" minimum={5} maximum={600} step={5} onChange={setWork} />
       <NumberControl label="REST" value={rest} unit="sec" minimum={5} maximum={600} step={5} onChange={setRest} />

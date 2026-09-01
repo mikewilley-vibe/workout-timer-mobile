@@ -1,7 +1,7 @@
-import * as Haptics from 'expo-haptics';
+import { setAudioModeAsync, useAudioPlayer } from 'expo-audio';
 import { useKeepAwake } from 'expo-keep-awake';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -20,6 +20,8 @@ function formatTime(totalSeconds: number) {
 
 export default function WorkoutScreen() {
   useKeepAwake();
+  const beepPlayer = useAudioPlayer(require('../assets/sounds/interval-beep.wav'));
+  const hasStartedIntervalRef = useRef(false);
   const params = useLocalSearchParams<{ title?: string; work?: string; rest?: string; minutes?: string }>();
   const workSeconds = numberParam(params.work, 60);
   const restSeconds = numberParam(params.rest, 30);
@@ -29,6 +31,10 @@ export default function WorkoutScreen() {
   const [clock, setClock] = useState(initialClock);
   const [running, setRunning] = useState(false);
   const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    void setAudioModeAsync({ playsInSilentMode: true });
+  }, []);
 
   useEffect(() => {
     if (!running || clock.complete) return;
@@ -46,16 +52,18 @@ export default function WorkoutScreen() {
     if (!started) return;
     if (clock.complete) {
       setRunning(false);
-      void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      beepPlayer.seekTo(0);
+      beepPlayer.play();
+    } else if (hasStartedIntervalRef.current) {
+      beepPlayer.seekTo(0);
+      beepPlayer.play();
     } else {
-      void Haptics.notificationAsync(clock.phase === 'work' ? Haptics.NotificationFeedbackType.Success : Haptics.NotificationFeedbackType.Warning);
-      const secondPulse = setTimeout(() => void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy), 180);
-      return () => clearTimeout(secondPulse);
+      hasStartedIntervalRef.current = true;
     }
-  }, [clock.complete, clock.phase, started]);
+  }, [beepPlayer, clock.complete, clock.phase, started]);
 
   function startOrPause() { setStarted(true); setRunning((current) => !current); }
-  function restart() { setRunning(false); setStarted(false); setClock(initialClock); }
+  function restart() { setRunning(false); setStarted(false); hasStartedIntervalRef.current = false; setClock(initialClock); }
 
   if (clock.complete) return <SafeAreaView style={styles.completeSafe}><View style={styles.completeContent}><Text style={styles.completeMark}>✓</Text><Text style={styles.completeTitle}>Workout complete!</Text><Text style={styles.completeCopy}>You finished {title}. Nice work.</Text><Pressable onPress={restart} style={styles.darkButton}><Text style={styles.darkButtonText}>DO IT AGAIN</Text></Pressable><Pressable onPress={() => router.back()} style={styles.linkButton}><Text style={styles.linkText}>CHOOSE ANOTHER TIMER</Text></Pressable></View></SafeAreaView>;
 
