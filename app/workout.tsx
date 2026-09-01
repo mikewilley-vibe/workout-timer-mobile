@@ -48,7 +48,9 @@ export default function WorkoutScreen() {
       setRunning(false);
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } else {
-      void Haptics.impactAsync(clock.phase === 'work' ? Haptics.ImpactFeedbackStyle.Heavy : Haptics.ImpactFeedbackStyle.Medium);
+      void Haptics.notificationAsync(clock.phase === 'work' ? Haptics.NotificationFeedbackType.Success : Haptics.NotificationFeedbackType.Warning);
+      const secondPulse = setTimeout(() => void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy), 180);
+      return () => clearTimeout(secondPulse);
     }
   }, [clock.complete, clock.phase, started]);
 
